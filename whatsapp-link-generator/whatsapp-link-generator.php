@@ -1,10 +1,11 @@
 <?php
 /**
  * Plugin Name: WhatsApp Link Generator
- * Plugin URI:  https://github.com/diegodigitalcr/whatsapp-link-generator
- * Description: Genera un enlace de WhatsApp con mensaje personalizado. Selector de país, mockup de celular y panel de administración con colores e íconos personalizables.
+ * Plugin URI:  https://diegodigital.com
+ * Description: Genera un enlace de WhatsApp con mensaje personalizado. Incluye selector de país con bandera, mockup de celular en tiempo real y panel de administración para personalizar colores y textos. Versión 2.0.
  * Version:     2.0.0
  * Author:      Diego Digital
+ * Author URI:  https://profiles.wordpress.org/diecorro/
  * License:     GPL-2.0-or-later
  * Text Domain: whatsapp-link-generator
  */
@@ -34,6 +35,14 @@ class WhatsApp_Link_Generator {
 	private function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_shortcode( 'whatsapp_link_generator', array( $this, 'render_shortcode' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_settings_link' ) );
+	}
+
+	public function add_settings_link( $links ) {
+		$url  = admin_url( 'options-general.php?page=wlg-settings' );
+		$link = '<a href="' . esc_url( $url ) . '">⚙️ Ajustes</a>';
+		array_unshift( $links, $link );
+		return $links;
 	}
 
 	public static function get_settings() {
@@ -71,12 +80,32 @@ class WhatsApp_Link_Generator {
 
 		wp_add_inline_style( 'wlg-style', "
 			:root{--wlg-primary:{$primary};--wlg-btn-text:{$btn_txt};}
-			.wlg-wrap .wlg-button{background-color:{$primary}!important;color:{$btn_txt}!important;}
+
+			/* Reset de estilos del tema para todos los botones dentro del plugin */
+			.wlg-wrap button{border-radius:inherit;text-transform:none;letter-spacing:normal;}
+
+			/* Botón principal */
+			.wlg-wrap .wlg-button{background-color:{$primary}!important;color:{$btn_txt}!important;border:none!important;box-shadow:none!important;}
+			.wlg-wrap .wlg-button:hover{background-color:{$primary}!important;filter:brightness(.88)!important;}
+
+			/* Selector de país */
+			.wlg-wrap .wlg-country-btn{background:#f9f9f9!important;border:1.5px solid #d4d4d4!important;border-right:none!important;color:#333!important;box-shadow:none!important;}
+			.wlg-wrap .wlg-country-btn:hover{background:#f0f0f0!important;border-color:#d4d4d4!important;}
+
+			/* Botón copiar */
+			.wlg-wrap .wlg-copy-btn{background:#fff!important;border:1.5px solid #d4d4d4!important;color:#555!important;box-shadow:none!important;}
+			.wlg-wrap .wlg-copy-btn:hover,.wlg-wrap .wlg-copy-btn.wlg-copied{background:{$primary}!important;border-color:{$primary}!important;color:#fff!important;}
+
+			/* Botón enviar del mockup */
+			.wlg-wrap .wlg-send-btn{background:{$primary}!important;border:none!important;box-shadow:none!important;}
+
+			/* Inputs */
 			.wlg-wrap .wlg-input:focus{border-color:{$primary}!important;box-shadow:0 0 0 3px rgba({$r},{$g},{$b},.18)!important;}
+
+			/* Acentos de color */
 			.wlg-wrap .wlg-notice{border-color:{$primary}!important;}
 			.wlg-wrap .wlg-open-link,.wlg-wrap .wlg-field-hint a{color:{$primary}!important;}
 			.wlg-wrap .wlg-link-input{color:{$primary}!important;}
-			.wlg-wrap .wlg-copy-btn:hover,.wlg-wrap .wlg-copy-btn.wlg-copied{background:{$primary}!important;border-color:{$primary}!important;}
 			.wlg-wrap .wlg-country-item:hover,.wlg-wrap .wlg-country-item.wlg-selected{background:rgba({$r},{$g},{$b},.12)!important;}
 		" );
 

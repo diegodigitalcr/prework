@@ -9,6 +9,14 @@
 	--wlg-shadow:    0 2px 8px rgba(0,0,0,.10);
 }
 
+/* ── Reset de botones (evita que el tema los pinte de otro color) ── */
+.wlg-wrap button {
+	font-family: inherit;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
 /* ── Wrapper ── */
 .wlg-wrap {
 	max-width: 900px;
