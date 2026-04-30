@@ -1,0 +1,326 @@
+/* =========================================
+   WhatsApp Link Generator – Plugin Styles
+   ========================================= */
+
+.wlg-wrap {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 40px 20px 60px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: #333;
+}
+
+/* Title */
+.wlg-title {
+	text-align: center;
+	font-size: clamp(1.4rem, 3vw, 2rem);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #1a1a1a;
+	margin-bottom: 16px;
+}
+
+/* Notice banner */
+.wlg-notice {
+	text-align: center;
+	font-size: 0.875rem;
+	color: #555;
+	background: #f5f5f5;
+	border-left: 3px solid #25D366;
+	padding: 10px 16px;
+	border-radius: 4px;
+	margin-bottom: 36px;
+}
+
+/* Two-column layout */
+.wlg-inner {
+	display: flex;
+	gap: 40px;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+/* ---- Form side ---- */
+.wlg-form-side {
+	flex: 1 1 340px;
+	max-width: 440px;
+}
+
+.wlg-brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 28px;
+}
+
+.wlg-brand-name {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #1a1a1a;
+}
+
+.wlg-wa-icon {
+	flex-shrink: 0;
+}
+
+/* Fields */
+.wlg-field {
+	margin-bottom: 20px;
+}
+
+.wlg-field label {
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: #444;
+	margin-bottom: 6px;
+}
+
+.wlg-input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 11px 14px;
+	border: 1.5px solid #d0d0d0;
+	border-radius: 6px;
+	font-size: 0.95rem;
+	color: #333;
+	background: #fff;
+	transition: border-color 0.2s;
+	outline: none;
+}
+
+.wlg-input:focus {
+	border-color: #25D366;
+	box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+}
+
+.wlg-field-hint {
+	font-size: 0.78rem;
+	color: #888;
+	margin-top: 5px;
+}
+
+.wlg-field-hint a {
+	color: #25D366;
+	text-decoration: none;
+}
+
+.wlg-field-hint a:hover {
+	text-decoration: underline;
+}
+
+/* Generate button */
+.wlg-button {
+	width: 100%;
+	padding: 13px;
+	background: #25D366;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.2s, transform 0.1s;
+	margin-top: 4px;
+}
+
+.wlg-button:hover {
+	background: #1ebe5d;
+}
+
+.wlg-button:active {
+	transform: scale(0.98);
+}
+
+/* Result area */
+.wlg-result {
+	margin-top: 22px;
+	animation: wlg-fade-in 0.3s ease;
+}
+
+@keyframes wlg-fade-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.wlg-result-label {
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: #444;
+	margin-bottom: 8px;
+}
+
+.wlg-result-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.wlg-link-input {
+	flex: 1;
+	background: #f9f9f9;
+	color: #25D366;
+	font-weight: 600;
+	font-size: 0.85rem;
+	cursor: text;
+}
+
+.wlg-copy-btn {
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	border: 1.5px solid #d0d0d0;
+	border-radius: 6px;
+	background: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #555;
+	transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.wlg-copy-btn:hover {
+	background: #25D366;
+	color: #fff;
+	border-color: #25D366;
+}
+
+.wlg-copy-btn.copied {
+	background: #25D366;
+	color: #fff;
+	border-color: #25D366;
+}
+
+.wlg-open-link {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: #25D366;
+	text-decoration: none;
+}
+
+.wlg-open-link:hover {
+	text-decoration: underline;
+}
+
+/* Error */
+.wlg-error {
+	margin-top: 12px;
+	padding: 10px 14px;
+	background: #fff3f3;
+	border-left: 3px solid #e53e3e;
+	border-radius: 4px;
+	font-size: 0.85rem;
+	color: #c53030;
+}
+
+/* ---- Phone mockup side ---- */
+.wlg-mockup-side {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.wlg-phone {
+	width: 240px;
+	border-radius: 28px;
+	overflow: hidden;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+	border: 2px solid #222;
+	background: #ece5dd;
+}
+
+/* Phone header (WhatsApp-style) */
+.wlg-phone-header {
+	background: #075e54;
+	padding: 12px 14px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.wlg-phone-avatar {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: #ccc;
+	flex-shrink: 0;
+}
+
+.wlg-phone-info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.wlg-phone-name {
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: #fff;
+	line-height: 1.2;
+}
+
+.wlg-phone-status {
+	font-size: 0.7rem;
+	color: rgba(255,255,255,0.75);
+}
+
+.wlg-phone-actions {
+	color: #fff;
+	font-size: 1.2rem;
+	cursor: default;
+	user-select: none;
+}
+
+/* Chat body */
+.wlg-phone-body {
+	min-height: 180px;
+	padding: 16px 12px;
+	background: #ece5dd url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E");
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+/* Chat bubble */
+.wlg-chat-bubble {
+	align-self: flex-end;
+	background: #dcf8c6;
+	border-radius: 12px 12px 2px 12px;
+	padding: 8px 12px 6px;
+	max-width: 90%;
+	font-size: 0.82rem;
+	color: #303030;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+	word-break: break-word;
+	line-height: 1.4;
+	position: relative;
+}
+
+.wlg-bubble-time {
+	display: block;
+	margin-top: 4px;
+	font-size: 0.7rem;
+	text-align: right;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+	.wlg-inner {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.wlg-form-side {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	.wlg-phone {
+		width: 200px;
+	}
+}
