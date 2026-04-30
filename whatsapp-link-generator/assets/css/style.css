@@ -1,0 +1,561 @@
+/* ============================================================
+   WhatsApp Link Generator v2 – Frontend Styles
+   ============================================================ */
+
+:root {
+	--wlg-primary:   #25D366;
+	--wlg-btn-text:  #ffffff;
+	--wlg-radius:    8px;
+	--wlg-shadow:    0 2px 8px rgba(0,0,0,.10);
+}
+
+/* ── Wrapper ── */
+.wlg-wrap {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 48px 20px 64px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: #333;
+	box-sizing: border-box;
+}
+
+/* ── Título ── */
+.wlg-title {
+	text-align: center;
+	font-size: clamp(1.35rem, 3vw, 2rem);
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: #1a1a1a;
+	margin: 0 0 14px;
+	line-height: 1.25;
+}
+
+/* ── Aviso ── */
+.wlg-notice {
+	text-align: center;
+	font-size: .875rem;
+	color: #555;
+	background: #f6f6f6;
+	border-left: 3px solid var(--wlg-primary);
+	padding: 10px 18px;
+	border-radius: 4px;
+	margin: 0 0 40px;
+}
+
+/* ── Layout dos columnas ── */
+.wlg-inner {
+	display: flex;
+	gap: 48px;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+/* ── Columna formulario ── */
+.wlg-form-side {
+	flex: 1 1 320px;
+	max-width: 440px;
+}
+
+.wlg-brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 28px;
+}
+
+.wlg-brand-name {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #1a1a1a;
+}
+
+/* ── Campos ── */
+.wlg-field { margin-bottom: 20px; }
+
+.wlg-field > label,
+.wlg-field > div > label {
+	display: block;
+	font-size: .875rem;
+	font-weight: 600;
+	color: #444;
+	margin-bottom: 6px;
+}
+
+.wlg-input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 11px 14px;
+	border: 1.5px solid #d4d4d4;
+	border-radius: var(--wlg-radius);
+	font-size: .95rem;
+	color: #333;
+	background: #fff;
+	transition: border-color .2s, box-shadow .2s;
+	outline: none;
+}
+
+.wlg-input:focus {
+	border-color: var(--wlg-primary);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--wlg-primary) 20%, transparent);
+}
+
+/* ── Fila teléfono: selector + número ── */
+.wlg-phone-row {
+	display: flex;
+	gap: 0;
+	align-items: stretch;
+}
+
+/* ── Selector de país ── */
+.wlg-country-wrap {
+	position: relative;
+	flex-shrink: 0;
+}
+
+.wlg-country-btn {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	height: 100%;
+	padding: 11px 10px;
+	background: #f9f9f9;
+	border: 1.5px solid #d4d4d4;
+	border-right: none;
+	border-radius: var(--wlg-radius) 0 0 var(--wlg-radius);
+	cursor: pointer;
+	font-size: .9rem;
+	white-space: nowrap;
+	transition: background .15s;
+	color: #333;
+}
+
+.wlg-country-btn:hover { background: #f0f0f0; }
+
+.wlg-c-flag { font-size: 1.1rem; line-height: 1; }
+.wlg-c-dial { font-weight: 600; font-size: .85rem; }
+.wlg-c-arrow { transition: transform .2s; color: #888; }
+.wlg-country-btn[aria-expanded="true"] .wlg-c-arrow { transform: rotate(180deg); }
+
+/* Panel desplegable */
+.wlg-country-panel {
+	position: absolute;
+	top: calc(100% + 4px);
+	left: 0;
+	z-index: 999;
+	width: 270px;
+	background: #fff;
+	border: 1.5px solid #d4d4d4;
+	border-radius: var(--wlg-radius);
+	box-shadow: 0 8px 24px rgba(0,0,0,.14);
+	overflow: hidden;
+	animation: wlg-dropdown-in .15s ease;
+}
+
+@keyframes wlg-dropdown-in {
+	from { opacity: 0; transform: translateY(-6px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.wlg-country-search-wrap {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 12px;
+	border-bottom: 1px solid #eee;
+}
+
+.wlg-country-search {
+	flex: 1;
+	border: none;
+	outline: none;
+	font-size: .875rem;
+	color: #333;
+	background: transparent;
+}
+
+.wlg-country-list {
+	list-style: none;
+	margin: 0;
+	padding: 4px 0;
+	max-height: 220px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+}
+
+.wlg-country-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 14px;
+	cursor: pointer;
+	font-size: .875rem;
+	transition: background .12s;
+}
+
+.wlg-country-item:hover,
+.wlg-country-item.wlg-selected {
+	background: color-mix(in srgb, var(--wlg-primary) 12%, transparent);
+}
+
+.wlg-ci-flag { font-size: 1.1rem; flex-shrink: 0; }
+.wlg-ci-name { flex: 1; color: #222; }
+.wlg-ci-dial { color: #888; font-size: .8rem; font-weight: 600; }
+
+.wlg-country-item.wlg-hidden { display: none; }
+
+/* Campo número sin bordes izquierdos redondeados */
+.wlg-number-input {
+	border-radius: 0 var(--wlg-radius) var(--wlg-radius) 0;
+	flex: 1;
+}
+
+/* ── Botón generar ── */
+.wlg-button {
+	width: 100%;
+	padding: 13px;
+	background: var(--wlg-primary);
+	color: var(--wlg-btn-text);
+	border: none;
+	border-radius: var(--wlg-radius);
+	font-size: 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: filter .2s, transform .1s;
+	margin-top: 4px;
+	letter-spacing: .01em;
+}
+
+.wlg-button:hover  { filter: brightness(.9); }
+.wlg-button:active { transform: scale(.98); }
+
+/* ── Resultado ── */
+.wlg-result {
+	margin-top: 22px;
+	animation: wlg-fade-in .3s ease;
+}
+
+@keyframes wlg-fade-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.wlg-result-label {
+	font-size: .85rem;
+	font-weight: 600;
+	color: #444;
+	margin: 0 0 8px;
+}
+
+.wlg-result-row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.wlg-link-input {
+	flex: 1;
+	background: #f6fdf9;
+	color: var(--wlg-primary);
+	font-weight: 600;
+	font-size: .85rem;
+}
+
+.wlg-copy-btn {
+	flex-shrink: 0;
+	width: 42px;
+	height: 42px;
+	border: 1.5px solid #d4d4d4;
+	border-radius: var(--wlg-radius);
+	background: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #555;
+	transition: background .2s, color .2s, border-color .2s;
+}
+
+.wlg-copy-btn:hover,
+.wlg-copy-btn.wlg-copied {
+	background: var(--wlg-primary);
+	color: #fff;
+	border-color: var(--wlg-primary);
+}
+
+.wlg-open-link {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: .875rem;
+	font-weight: 700;
+	color: var(--wlg-primary);
+	text-decoration: none;
+}
+
+.wlg-open-link:hover { text-decoration: underline; }
+
+/* ── Error ── */
+.wlg-error {
+	margin-top: 12px;
+	padding: 10px 14px;
+	background: #fff5f5;
+	border-left: 3px solid #e53e3e;
+	border-radius: 4px;
+	font-size: .85rem;
+	color: #c53030;
+}
+
+/* ══════════════════════════════════════
+   MOCKUP DEL CELULAR
+   ══════════════════════════════════════ */
+
+.wlg-mockup-side {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 4px;
+}
+
+/* Marco del dispositivo */
+.wlg-device {
+	width: 258px;
+	background: #1c1c1e;
+	border-radius: 44px;
+	padding: 14px;
+	box-shadow:
+		0 0 0 1px #3a3a3c,
+		0 2px 4px rgba(0,0,0,.4),
+		0 24px 50px rgba(0,0,0,.38),
+		inset 0 1px 1px rgba(255,255,255,.08);
+	position: relative;
+}
+
+/* Botones laterales izquierda (volumen) */
+.wlg-device::before {
+	content: '';
+	position: absolute;
+	left: -3.5px;
+	top: 96px;
+	width: 3.5px;
+	height: 34px;
+	background: #2c2c2e;
+	border-radius: 2px 0 0 2px;
+	box-shadow: 0 42px 0 #2c2c2e;
+}
+
+/* Botón lateral derecha (encendido) */
+.wlg-device::after {
+	content: '';
+	position: absolute;
+	right: -3.5px;
+	top: 118px;
+	width: 3.5px;
+	height: 60px;
+	background: #2c2c2e;
+	border-radius: 0 2px 2px 0;
+}
+
+/* Pantalla */
+.wlg-device-screen {
+	background: #fff;
+	border-radius: 32px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	height: 470px;
+}
+
+/* Barra de estado */
+.wlg-status-bar {
+	flex-shrink: 0;
+	height: 36px;
+	background: #000;
+	padding: 0 18px 0 22px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: #fff;
+}
+
+.wlg-status-time {
+	font-size: .72rem;
+	font-weight: 700;
+	letter-spacing: -.01em;
+}
+
+.wlg-status-icons {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+/* Header WhatsApp */
+.wlg-wa-header {
+	flex-shrink: 0;
+	background: #075e54;
+	padding: 8px 12px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.wlg-wa-avatar {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: rgba(255,255,255,.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.wlg-wa-info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	overflow: hidden;
+}
+
+.wlg-wa-cname {
+	font-size: .8rem;
+	font-weight: 700;
+	color: #fff;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.wlg-wa-online {
+	font-size: .65rem;
+	color: rgba(255,255,255,.75);
+}
+
+.wlg-wa-actions {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+/* Área de chat */
+.wlg-chat-area {
+	flex: 1;
+	background: #e5ddd5;
+	background-image:
+		radial-gradient(circle at 20% 80%, rgba(255,255,255,.08) 0%, transparent 50%),
+		radial-gradient(circle at 80% 20%, rgba(0,0,0,.04) 0%, transparent 50%);
+	padding: 12px 10px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.wlg-chat-datepill {
+	align-self: center;
+	background: rgba(225,220,212,.85);
+	color: #6b6b6b;
+	font-size: .62rem;
+	padding: 3px 9px;
+	border-radius: 8px;
+	backdrop-filter: blur(4px);
+}
+
+.wlg-bubble-wrap {
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* Burbuja del mensaje */
+.wlg-bubble {
+	background: #dcf8c6;
+	border-radius: 10px 10px 2px 10px;
+	padding: 7px 10px 5px;
+	max-width: 85%;
+	font-size: .75rem;
+	color: #303030;
+	box-shadow: 0 1px 2px rgba(0,0,0,.14);
+	word-break: break-word;
+	line-height: 1.45;
+	position: relative;
+}
+
+/* Cola de la burbuja */
+.wlg-bubble::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	right: -6px;
+	width: 0;
+	height: 0;
+	border-left: 6px solid #dcf8c6;
+	border-bottom: 6px solid transparent;
+}
+
+.wlg-bubble-meta {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 3px;
+	margin-top: 3px;
+}
+
+.wlg-bubble-time {
+	font-size: .6rem;
+	color: #8a9b8a;
+}
+
+/* Barra inferior de entrada */
+.wlg-input-bar {
+	flex-shrink: 0;
+	background: #f0f0f0;
+	padding: 6px 8px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.wlg-input-mock {
+	flex: 1;
+	background: #fff;
+	border-radius: 22px;
+	padding: 7px 12px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: .72rem;
+	color: #bbb;
+	box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+
+.wlg-send-btn {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: #25D366;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: default;
+	flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+	.wlg-inner {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.wlg-form-side {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	.wlg-device { width: 220px; }
+	.wlg-device-screen { height: 400px; }
+}
