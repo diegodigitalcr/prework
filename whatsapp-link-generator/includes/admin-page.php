@@ -145,16 +145,7 @@ function wlg_render_settings_page() {
 				<form method="post" action="options.php">
 					<?php settings_fields( 'wlg_options_group' ); ?>
 
-					<div class="wlg-card">
-						<h2>🎨 Colores</h2>
-						<?php do_settings_sections( 'wlg-settings' ); ?>
-						<!-- Rendered sections below manually for card layout -->
-					</div>
-
 					<?php
-					// Render each section manually inside cards
-					global $wp_settings_sections, $wp_settings_fields;
-
 					$sections = array(
 						'wlg_sec_colors'  => array( 'icon' => '🎨', 'label' => 'Colores' ),
 						'wlg_sec_texts'   => array( 'icon' => '📝', 'label' => 'Textos' ),
