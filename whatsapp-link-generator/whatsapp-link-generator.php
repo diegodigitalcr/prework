@@ -60,12 +60,25 @@ class WhatsApp_Link_Generator {
 		wp_enqueue_style( 'wlg-style', WLG_URL . 'assets/css/style.css', array(), WLG_VERSION );
 
 		$s       = self::get_settings();
-		$primary = sanitize_hex_color( $s['color_primary'] );
-		$btn_txt = sanitize_hex_color( $s['color_btn_text'] );
-		wp_add_inline_style(
-			'wlg-style',
-			":root{--wlg-primary:{$primary};--wlg-btn-text:{$btn_txt};}"
-		);
+		$primary = sanitize_hex_color( $s['color_primary'] ) ?: '#25D366';
+		$btn_txt = sanitize_hex_color( $s['color_btn_text'] ) ?: '#ffffff';
+
+		// Hex sin # para el rgba del focus
+		$hex     = ltrim( $primary, '#' );
+		$r       = hexdec( substr( $hex, 0, 2 ) );
+		$g       = hexdec( substr( $hex, 2, 2 ) );
+		$b       = hexdec( substr( $hex, 4, 2 ) );
+
+		wp_add_inline_style( 'wlg-style', "
+			:root{--wlg-primary:{$primary};--wlg-btn-text:{$btn_txt};}
+			.wlg-wrap .wlg-button{background-color:{$primary}!important;color:{$btn_txt}!important;}
+			.wlg-wrap .wlg-input:focus{border-color:{$primary}!important;box-shadow:0 0 0 3px rgba({$r},{$g},{$b},.18)!important;}
+			.wlg-wrap .wlg-notice{border-color:{$primary}!important;}
+			.wlg-wrap .wlg-open-link,.wlg-wrap .wlg-field-hint a{color:{$primary}!important;}
+			.wlg-wrap .wlg-link-input{color:{$primary}!important;}
+			.wlg-wrap .wlg-copy-btn:hover,.wlg-wrap .wlg-copy-btn.wlg-copied{background:{$primary}!important;border-color:{$primary}!important;}
+			.wlg-wrap .wlg-country-item:hover,.wlg-wrap .wlg-country-item.wlg-selected{background:rgba({$r},{$g},{$b},.12)!important;}
+		" );
 
 		wp_enqueue_script( 'wlg-script', WLG_URL . 'assets/js/script.js', array(), WLG_VERSION, true );
 		wp_localize_script(
